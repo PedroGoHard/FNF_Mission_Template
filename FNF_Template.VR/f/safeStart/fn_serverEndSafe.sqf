@@ -1,0 +1,40 @@
+if (!isServer || !phx_safeStartEnabled) exitWith {};
+
+if (satEnabled) then {
+  ["pxs_satcom_a3\safeStartEnd.sqf"] remoteExec ["execVM", 0, false];
+  deleteVehicle satLap;
+  deleteVehicle table6;
+};
+
+if !(getMarkerColor "opforSafeMarker" isEqualTo "") then {
+  deleteMarker "opforSafeMarker";
+};
+if !(getMarkerColor "bluforSafeMarker" isEqualTo "") then {
+  deleteMarker "bluforSafeMarker";
+};
+
+if !(getMarkerColor "optStartMark_1" isEqualTo "") then {
+  _areaMarkers = ["optStartMark_1","optStartMark_2","optStartMark_3","optStartMark_4","optStartMark_5"];
+
+  {deleteMarker _x;} forEach _areaMarkers;
+};
+
+uiSleep  10;
+
+if (!isNil "lap_1") then {
+  _laptops = [lap_1,lap_2,lap_3,lap_4,lap_5];
+  _tables = [table1,table2,table3,table4,table5];
+  _teleportMarkers = ["optStart_1","optStart_2","optStart_3","optStart_4","optStart_5"];
+
+  for [{_i=0}, {_i<10}, {_i=_i+1}] do {
+    {_x setObjectTextureGlobal [0, "#(rgb,8,8,3)color(1,0,0,1)"];} forEach _laptops;
+    uiSleep  0.5;
+    {_x setObjectTextureGlobal [0, "#(rgb,8,8,3)color(1,1,1,1)"];} forEach _laptops;
+    uiSleep  0.5;
+  };
+  {deleteVehicle _x;} forEach _laptops;
+  {deleteVehicle _x;} forEach _tables;
+  {deleteMarker _x;} forEach _teleportMarkers;
+};
+
+phx_safeStartEnabled = false;

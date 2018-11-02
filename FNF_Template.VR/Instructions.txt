@@ -1,0 +1,5 @@
+1. Change the map extension of "FNF_Template.VR" (the .VR part) to match whatever terrain you are going to be using
+
+2. Put the folder in your Arma missions folder and load it in the editor
+
+3. Move the units around as you wish, make sure you keep the respective starting location markers with each side. (bluforSafeMarker & opforSafeMarker)

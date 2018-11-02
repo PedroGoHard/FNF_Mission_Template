@@ -22,6 +22,7 @@ endOnSideEliminated = true; //true/false to enable game ending when one side is 
 
 activeMode = "neutralCaptureTheFlag"; //Change this string to whatever game mode you want
 modeParams = [];
+
 /*
 Values:
 adUplink - attack/defend Uplink
@@ -40,7 +41,7 @@ params-
 
 Required: defendingSide - string - east/west to set which side will be defending
 Optional: vipMarkers - boolean - true/false to enable global markers following VIPs - defualt: true
-Optional :vipMarkersUpdateTime - integer - how often the global markers will update - default: 30
+Optional" vipMarkersUpdateTime - integer - how often the global markers will update - default: 30
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 adCapturetheFlag - attack/defend capture the flag
 neutralUplink - neutral version of uplink

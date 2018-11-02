@@ -1,6 +1,5 @@
 _endAliveEH = addMissionEventHandler ["EntityKilled", {
   params ["_unit", "_killer", "_instigator", "_useEffects"];
-  ["balls"] remoteExecCall ["phx_fnc__hintThenClear", 0];
   if (({(alive _x) and (side _x == west)}count playableUnits) < 1  && !gameEnd) then {
     gameEnd = true;
     ["BLUFOR eliminated.\nOPFOR wins!"] remoteExec ["hint"];

@@ -7,16 +7,20 @@ if (satEnabled) then {
 };
 
 if !(getMarkerColor "opforSafeMarker" isEqualTo "") then {
-  deleteMarker "opforSafeMarker";
+  ["opforSafeMarker"] remoteExec ["deleteMarker",0,true];
 };
 if !(getMarkerColor "bluforSafeMarker" isEqualTo "") then {
-  deleteMarker "bluforSafeMarker";
+  ["bluforSafeMarker"] remoteExec ["deleteMarker",0,true];
 };
 
 if !(getMarkerColor "optStartMark_1" isEqualTo "") then {
   _areaMarkers = ["optStartMark_1","optStartMark_2","optStartMark_3","optStartMark_4","optStartMark_5"];
 
-  {deleteMarker _x;} forEach _areaMarkers;
+  {
+    if (!(getMarkerColor _x isEqualTo "")) then {
+      [_x] remoteExec ["deleteMarker",0,true];
+    };
+  } forEach _markers;
 };
 
 uiSleep  10;
@@ -34,7 +38,11 @@ if (!isNil "lap_1") then {
   };
   {deleteVehicle _x;} forEach _laptops;
   {deleteVehicle _x;} forEach _tables;
-  {deleteMarker _x;} forEach _teleportMarkers;
+  {
+    if (!(getMarkerColor _x isEqualTo "")) then {
+      [_x] remoteExec ["deleteMarker",0,true];
+    };
+  } forEach _teleportMarkers;
 };
 
 phx_safeStartEnabled = false;

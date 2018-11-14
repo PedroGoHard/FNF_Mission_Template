@@ -1,6 +1,7 @@
 waitUntil {!isNil "serverVarsSetup"};
 
 gameEnd = false;
+publicVariable "gameEnd";
 
 if (satEnabled) then {
   switch (satEnabledSide) do {
@@ -13,12 +14,12 @@ if (startLocationsEnabled) then {
   switch (startLocationsSide) do {
     case east: {
       if !(getMarkerColor "opforSafeMarker" isEqualTo "") then {
-        deleteMarker "opforSafeMarker";
+        ["opforSafeMarker"] remoteExec ["deleteMarker",0,true];
       };
     };
     case west: {
       if !(getMarkerColor "bluforSafeMarker" isEqualTo "") then {
-        deleteMarker "bluforSafeMarker";
+        ["bluforSafeMarker"] remoteExec ["deleteMarker",0,true];
       };
     };
   };
@@ -34,20 +35,20 @@ if (!startLocationsEnabled) then {
     };
   } forEach _markers;
   {
-    if (!isNil "_x") then {
+    if (!isNull _x) then {
       deleteVehicle _x;
     };
   } forEach _objs;
 };
 
 if (!satEnabled) then {
-  if (!isNil "satLap") then {deleteVehicle satLap;};
-  if (!isNil "table6") then {deleteVehicle table6;};
+  if (!isNull satLap) then {deleteVehicle satLap;};
+  if (!isNull table6) then {deleteVehicle table6;};
 };
 
 switch (activeMode) do {
   case "adUplink": {
-    [] execVM "f\servermodes\adUplink.sqf";
+    modeParams execVM "f\servermodes\adUplink.sqf";
     [[],"f\clientmodes\adUplink.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
   };
   case "adDestroy": {
@@ -61,9 +62,6 @@ switch (activeMode) do {
   };
   case "neutralUplink": {
     [] execVM "f\servermodes\neutralUplink.sqf";
-  };
-  case "neutralTheGuy": {
-    [] execVM "f\servermodes\neutralTheGuy.sqf";
   };
   case "neutralSector": {
     [] execVM "f\servermodes\neutralSector.sqf";
@@ -79,33 +77,27 @@ switch (activeMode) do {
 };
 
 //Uplink
-if (!(activeMode isEqualTo "adUplink") || !(activeMode isEqualTo "neutralUplink")) then {
-  _terminals = [term1,term2,term3];
-  _markers = ["term1Mark","term2Mark","term3Mark"];
-  if (!(activeMode isEqualTo "adUplink") && !(activeMode isEqualTo "neutralUplink")) then {
-    {
-      if (!isNil "_x") then {
-        deleteVehicle _x;
-      };
-    } forEach _terminals;
-    {
-      if (!(getMarkerColor _x isEqualTo "")) then {
-        [_x] remoteExec ["deleteMarker",0,true];
-      };
-    } forEach _markers;
-  };
-  if ((activeMode isEqualTo "adUplink") && !(activeMode isEqualTo "neutralUplink")) then {
-    {
-      if (!isNil "_x") then {
-        deleteVehicle _x;
-      };
-    } forEach [term2,term3];
-    {
-      if (!(getMarkerColor _x isEqualTo "")) then {
-        [_x] remoteExec ["deleteMarker",0,true];
-      };
-    } forEach ["term2Mark","term3Mark"];
-    "term1Mark" setMarkerText "Terminal";
+if (!(activeMode isEqualTo "adUplink")) then {
+  _objs = [term1,term2,uplinkSpeaker1,uplinkSpeaker2,uplinkSound1,uplinkSound2];
+  _markers = ["term1Mark","term2Mark"];
+  {
+    if (!isNull _x) then {
+      deleteVehicle _x;
+    };
+  } forEach _objs;
+  {
+    if (!(getMarkerColor _x isEqualTo "")) then {
+      [_x] remoteExec ["deleteMarker",0,true];
+    };
+  } forEach _markers;
+};
+
+if (activeMode isEqualTo "adUplink") then {
+  if (modeParams select 1 == 1) then {
+    deleteVehicle term2;
+    deleteVehicle uplinkSpeaker2;
+    deleteVehicle uplinkSound2;
+    "term2Mark" remoteExec ["deleteMarker",0,true];
   };
 };
 
@@ -119,7 +111,7 @@ if !(activeMode isEqualTo "adVIP") then {
   } forEach _markers;
   _vips =[vip1,vip2];
   {
-    if (!isNil "_x") then {
+    if (!isNull _x) then {
       deleteVehicle _x;
     };
   } forEach _vips;
@@ -129,7 +121,7 @@ if !(activeMode isEqualTo "adVIP") then {
 if !(activeMode isEqualTo "adDestroy") then {
   _objs = [obj1,obj2];
   {
-    if (!isNil "_x") then {
+    if (!isNull _x) then {
       deleteVehicle _x;
     };
   } forEach _objs;
@@ -141,28 +133,24 @@ if !(activeMode isEqualTo "adDestroy") then {
   } forEach _markers;
 };
 
-//Capture The Guy
-if !(activeMode isEqualTo "neutralTheGuy") then {
-  if (!isNil "theGuy") then {
-    deleteVehicle theGuy;
-  };
-  if (!(getMarkerColor "theGuyMark" isEqualTo "")) then {
-    deleteMarker "theGuyMark";
-  };
-};
-
 //Neutral capture the flag
 if !(activeMode isEqualTo "neutralCaptureTheFlag") then {
-  if (!isNil "flagObj") then {
+  if (!isNull flagObj) then {
     deleteVehicle flagObj;
+  };
+  if (!isNull flagPole) then {
+    deleteVehicle flagPole;
+  };
+  if (!isNull flagBanner) then {
+    deleteVehicle flagBanner;
   };
   if (!(getMarkerColor "flagMark" isEqualTo "")) then {
     deleteMarker "flagMark";
   };
-  if (!isNil "bluFlagTrig") then {
+  if (!isNull bluFlagTrig) then {
     deleteVehicle bluFlagTrig;
   };
-  if (!isNil "opfFlagTrig") then {
+  if (!isNull opfFlagTrig) then {
     deleteVehicle opfFlagTrig;
   };
 };

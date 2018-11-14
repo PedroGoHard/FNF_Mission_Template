@@ -1,6 +1,9 @@
 //====================================================================================================
 // Client init - Player is not null by this point
 
+//Set marker visibility
+side player execVM "f\init\clientMarkerVisibilty.sqf";
+
 // Set loadouts
 call phx_fnc_loadout_set;
 
@@ -14,9 +17,6 @@ if (f_param_radios isEqualTo 1) then {
 };
 
 phx_end_clientWait = [phx_fnc_end_clientWait, 5, []] call CBA_fnc_addPerFrameHandler;
-
-//Set marker visibility
-[side player] execVM "f\init\clientMarkerVisibilty.sqf";
 
 //Make sure player stays within safe start markers
 [] execVM "f\safeStart\f_playerInStart.sqf";

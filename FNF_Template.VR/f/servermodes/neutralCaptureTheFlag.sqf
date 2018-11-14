@@ -1,5 +1,70 @@
 if (!isServer) exitWith {};
 
+instantCapture = true;
+
+captureTime = _this select 0;
+if (isNil "captureTime") then {
+  captureTime = 0;
+};
+if (captureTime > 0) then {
+  instantCapture = false;
+  flagInBlu = false;
+  flagInOpf = false;
+};
+if (instantCapture) then {
+  bluFlagTrig setTriggerStatements  ["flagObj inArea thisTrigger && !gameEnd", "
+  ['BLUFOR has captured the flag.\nBLUFOR wins!'] remoteExec ['hint'];
+  deleteVehicle flagObj;
+  gameEnd = true;
+  ['flagMark'] remoteExec ['deleteMarker',0,true];
+  ['bluFlagTask','SUCCEEDED'] call BIS_fnc_taskSetState;
+  ['opfFlagTask','FAILED'] call BIS_fnc_taskSetState;
+  [] spawn {
+  sleep 20;
+  'end1' call BIS_fnc_endMissionServer;
+  };
+  ",""];
+
+  opfFlagTrig setTriggerStatements ["flagObj inArea thisTrigger && !gameEnd", "
+  ['OPFOR has captured the flag.\nOPFOR wins!'] remoteExec ['hint'];
+  deleteVehicle flagObj;
+  gameEnd = true;
+  ['flagMark'] remoteExec ['deleteMarker',0,true];
+  ['opfFlagTask','SUCCEEDED'] call BIS_fnc_taskSetState;
+  ['bluFlagTask','FAILED'] call BIS_fnc_taskSetState;
+  [] spawn {
+  sleep 20;
+  'end1' call BIS_fnc_endMissionServer;
+  };
+  ",""];
+};
+
+if (!instantCapture) then {
+  bluFlagTrig setTriggerActivation ["NONE", "PRESENT", true];
+  bluFlagTrig setTriggerStatements ["flagObj inArea thisTrigger && !gameEnd", "
+  ['BLUFOR has the flag in their capture zone!'] remoteExec ['hint'];
+  flagInBlu = true;
+  [west] spawn flagInZone;
+  ","
+  if (!gameEnd) then {
+    flagInBlu = false;
+    ['The flag has left the BLUFOR capture zone!'] remoteExec ['hint'];
+  };
+  "];
+
+  opfFlagTrig setTriggerActivation ["NONE", "PRESENT", true];
+  opfFlagTrig setTriggerStatements ["flagObj inArea thisTrigger && !gameEnd", "
+  ['OPFOR has the flag in their capture zone!'] remoteExec ['hint'];
+  flagInOpf = true;
+  [east] spawn flagInZone;
+  ","
+  if (!gameEnd) then {
+    flagInOpf = false;
+    ['The flag has left the OPFOR capture zone!'] remoteExec ['hint'];
+  };
+  "];
+};
+
 onPlayerDisconnected {
   if (_uid == flagPlayerUID) then {
     call dropFlagServer;
@@ -63,34 +128,93 @@ dummyMark = "Land_HelipadEmpty_F" createVehicle [0,0,0];
 removeFlagAction = {
   [flagObj] remoteExec ["removeAllActions",0,false];
 };
+removePoleAction = {
+  [flagPole] remoteExec ["removeAllActions",0,true];
+  [flagBanner] remoteExec ["hideObject",0,true];
+  [flagObj,false] remoteExec ["hideObject",0,true];
+};
 
 dropFlagServer = {
   params["_side"];
   detach flagObj;
   detach dummyMark;
+  flagObj attachTo [dummyMark,[0,0.475,1.5]];
+  [flagObj,[0,0,1]] remoteExec ["setVectorUp",0,false];
+  detach flagObj;
   [] remoteExec ["flagAction",0,false];
-  flagObj setFlagTexture "\A3\Data_F\Flags\flag_white_co.paa";
-  flagObj setPosATL (getPosATL dummyMark);
-  flagObj setVectorUp [0,0,1];
-  "flagMark" setMarkerType "hd_flag";
-
-  ["The flag has been dropped!"] remoteExecCall ["phx_fnc__hintThenClear", 0];
+  if !(flagObj inArea bluFlagTrig || flagObj inArea opfFlagTrig) then {
+    ["The flag has been dropped!"] remoteExecCall ["phx_fnc__hintThenClear", 0];
+    flagObj setFlagTexture "\A3\Data_F\Flags\flag_white_co.paa";
+    "flagMark" setMarkerType "hd_flag";
+  };
 };
 
 
 flagControlled = {
-  params["_side"];
+  params["_side","_player"];
+  call removeFlagAction;
+  dummyMark attachTo [_player,[0,0,0]];
+  flagObj attachTo [_player, [0.1,0.4,1.45], "aiming_axis"];
+  [flagObj,[0,0,1]] remoteExec ["setVectorUp",0,false];
 
   switch (_side) do {
     case east: {
-      ["OPFOR controls the flag!"] remoteExecCall ["phx_fnc__hintThenClear", 0];
-      flagObj setFlagTexture "\A3\Data_F\Flags\flag_red_co.paa";
-      "flagMark" setMarkerType "Faction_RU";
+      if !(flagObj inArea bluFlagTrig || flagObj inArea opfFlagTrig) then {
+        ["OPFOR controls the flag!"] remoteExecCall ["phx_fnc__hintThenClear", 0];
+        flagObj setFlagTexture "\A3\Data_F\Flags\flag_red_co.paa";
+        "flagMark" setMarkerType "Faction_RU";
+      };
     };
     case west: {
-      ["BLUFOR controls the flag!"] remoteExecCall ["phx_fnc__hintThenClear", 0];
-      flagObj setFlagTexture "\A3\Data_F\Flags\flag_blue_co.paa";
-      "flagMark" setMarkerType "Faction_US";
+      if !(flagObj inArea bluFlagTrig || flagObj inArea opfFlagTrig) then {
+        ["BLUFOR controls the flag!"] remoteExecCall ["phx_fnc__hintThenClear", 0];
+        flagObj setFlagTexture "\A3\Data_F\Flags\flag_blue_co.paa";
+        "flagMark" setMarkerType "Faction_US";
+      };
+    };
+  };
+};
+
+flagInZone = {
+  params ["_side"];
+  _captureTimeLeft = captureTime;
+
+  sleep 3;
+
+  _captureTimeLeft = _captureTimeLeft - 3;
+
+  switch (_side) do {
+    case east: {
+      while {flagInOpf && !gameEnd} do {
+        if (_captureTimeLeft <= 0) then {
+          gameEnd = true;
+          ["OPFOR has successfully held the flag.\nOPFOR wins!"] remoteExec ["hint"];
+          sleep 15;
+          "end1" call bis_fnc_endMissionServer;
+        };
+        _captureTimeDisplay = format ["OPFOR capture time remaining: %1", [_captureTimeLeft, "MM:SS"] call BIS_fnc_secondsToString];
+        [_captureTimeDisplay] remoteExec ["hintSilent"];
+
+        _captureTimeLeft = _captureTimeLeft - 1;
+
+        sleep 1;
+      };
+    };
+    case west: {
+      while {flagInBlu && !gameEnd} do {
+        if (_captureTimeLeft <= 0) then {
+          gameEnd = true;
+          ["BLUFOR has successfully held the flag.\nBLUFOR wins!"] remoteExec ["hint"];
+          sleep 15;
+          "end1" call bis_fnc_endMissionServer;
+        };
+        _captureTimeDisplay = format ["BLUFOR capture time remaining: %1", [_captureTimeLeft, "MM:SS"] call BIS_fnc_secondsToString];
+        [_captureTimeDisplay] remoteExec ["hintSilent"];
+
+        _captureTimeLeft = _captureTimeLeft - 1;
+
+        sleep 1;
+      };
     };
   };
 };

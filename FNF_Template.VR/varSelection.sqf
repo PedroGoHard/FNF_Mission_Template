@@ -20,15 +20,18 @@ EAST
 
 endOnSideEliminated = true; //true/false to enable game ending when one side is eliminated
 
-activeMode = "neutralCaptureTheFlag"; //Change this string to whatever game mode you want
+activeMode = "neutralCaptureTheFlag"; //Change this string to whatever game mode you want (listed below)
 modeParams = [];
 
 /*
 Values:
+////////////////////////////////////////////////////////////////////////////////////////////////////
 adUplink - attack/defend Uplink
 params-
 
 Required: defendingSide - string - east/west to set which side will be defending
+Optional: objectivesNumber - integer - 1-2 - play with 1-2 objectives (if 1, term1 will be chosen, if 2, term1 & term2 chosen) - default: 2
+Optional: hackTimer - integer - time in seconds for the hack timer - default: 180
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 adDestroy - attack/defend destory
 params-
@@ -43,12 +46,16 @@ Required: defendingSide - string - east/west to set which side will be defending
 Optional: vipMarkers - boolean - true/false to enable global markers following VIPs - defualt: true
 Optional" vipMarkersUpdateTime - integer - how often the global markers will update - default: 30
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-adCapturetheFlag - attack/defend capture the flag
-neutralUplink - neutral version of uplink
-neutralSector - neutral sector control
-neutralTheGuy - neutral The Guy objective (capture and hold VIP)
+adCapturetheFlag - attack/defend capture the flag - NOT IMPLEMENTED YET
+neutralSector - neutral sector control - NOT IMPLEMENTED YET
+////////////////////////////////////////////////////////////////////////////////////////////////////
 neutralCaptureTheFlag - neutral capture the flag objective
+params-
+
+Optional: holdTime - integer - time in seconds that a side has to hold the flag in their capture zone - default: 0 (instant capture)
+////////////////////////////////////////////////////////////////////////////////////////////////////
 none - choose this if you want to create your own objectives and delete all the template objectives
+////////////////////////////////////////////////////////////////////////////////////////////////////
 */
 
 serverVarsSetup = true;

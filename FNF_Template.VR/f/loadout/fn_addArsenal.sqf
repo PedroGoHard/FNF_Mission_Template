@@ -62,7 +62,7 @@ _opfBaseItemClasses = ["ACE_fieldDressing","ACE_bloodIV","ACE_bloodIV_250","ACE_
 "rhsusf_shemagh_gogg_grn","rhsusf_shemagh2_white","rhsusf_shemagh_white","rhsusf_shemagh2_tan","rhsusf_shemagh_tan","rhsusf_shemagh2_od","rhsusf_shemagh_od","rhsusf_shemagh2_grn","rhsusf_shemagh_grn","G_Shades_Black","G_Shades_Blue","G_Shades_Green","G_Shades_Red","G_Lowprofile","G_Combat_Goggles_tna_F","G_Combat","rhs_ess_black","rhs_googles_clear","rhs_googles_yellow","rhs_googles_orange","G_Aviator",
 "rhs_acc_1p63","rhs_acc_rakursPM","rhs_acc_1p87","optic_Yorris","optic_ACO_grn","optic_Aco","optic_Holosight_blk_F","optic_Holosight_khk_F","optic_Holosight","rhsusf_acc_EOTECH","rhs_acc_pkas","rhsusf_acc_eotech_xps3"
 ];
-_opfBaseMagazineClasses = ["rhs_30Rnd_545x39_AK_green","rhs_30Rnd_545x39_7N6_AK",
+_opfBaseMagazineClasses = ["rhs_30Rnd_545x39_AK_green","rhs_30Rnd_545x39_7N6_AK","rhs_mag_an_m14_th3","HandGrenade","ACE_M84",
 "SmokeShellBlue","SmokeShellPurple","SmokeShellOrange","SmokeShellGreen","SmokeShellRed","SmokeShellYellow","ACE_HandFlare_Green","ACE_HandFlare_Red","ACE_HandFlare_White",
 "ACE_HandFlare_Yellow","ACE_Chemlight_HiOrange","ACE_Chemlight_HiRed","ACE_Chemlight_HiWhite","ACE_Chemlight_HiYellow",
 "rhs_mag_762x25_8","rhs_mag_9x19_17","10Rnd_9x21_Mag","rhs_18rnd_9x21mm_7N28"

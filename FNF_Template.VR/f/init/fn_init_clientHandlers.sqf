@@ -30,7 +30,7 @@ deleteGroundClutterEH = player addEventHandler ["Put", {
   _weaponsArray = [primaryWeaponPlayer,secondaryWeaponPlayer,handgunWeaponPlayer];
   _ammoArray = weaponMags + weaponMagsSecondary + handgunMags;
   _itemsArray = [primaryWeaponPlayer,secondaryWeaponPlayer,handgunWeaponPlayer,uniformPlayer,vestPlayer,backpackPlayer,headPlayer];
-  _itemsArray = _itemsArray + _weaponsArray + _ammoArray;
+  _itemsArray = _itemsArray + _weaponsArray;
   if ((_container isKindOf "GroundWeaponHolder" || _item in _itemsArray) && (!(_container isEqualTo _unit) || _item in _itemsArray)) then {
     [_container, _item, 1, false] call CBA_fnc_removeItemCargo;
     [_container, _item, 1, false] call CBA_fnc_removeWeaponCargo;

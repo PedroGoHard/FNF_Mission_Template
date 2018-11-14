@@ -1,4 +1,4 @@
-_side = _this select 0;
+_side = _this;
 
 switch (_side) do {
   case west: {

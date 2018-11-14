@@ -1,11 +1,14 @@
+if (!isServer) exitWith {};
+
 defendingSide = _this select 0;
 vipMarkers = _this select 1;
+vipMarkersUpdateTime = _this select 2;
 
 //Set defaults and params
 if (isNil "vipMarkers") then {
   vipMarkers = true;
 };
-if (isNil "_this select 2") then {
+if (isNil "vipMarkersUpdateTime") then {
   vipMarkersUpdateTime = 30;
 } else {
   vipMarkersUpdateTime = _this select 2;
@@ -14,6 +17,7 @@ if (isNil "_this select 2") then {
 if (isNil "defendingSide") then {
   systemChat "You have not configured 'varSelection.sqf' properly! You need to choose a defending side";
 };
+if (isNil "defendingSide") exitWith {};
 
 if !(isNil "defendingSide") then {
   if (!(defendingSide isEqualTo west) && !(defendingSide isEqualTo east)) then {
@@ -37,40 +41,53 @@ vip2KillMessage = false;
 //Create tasks
 switch (defendingSide) do {
   case east: {
-    [east,["opfvip1task"],["Protect HVT #1","Protect HVT #1",""],[vip1],"ASSIGNED",1,true,"Protect"] call BIS_fnc_taskCreate;
-    [east,["opfvip2task"],["Protect HVT #2","Protect HVT #2",""],[vip2],"CREATED",1,true,"Protect"] call BIS_fnc_taskCreate;
-    [west,["bluvip1task"],["Kill HVT #1","Kill HVT #1",""],[objNull],"ASSIGNED",1,true,"Kill"] call BIS_fnc_taskCreate;
-    [west,["bluvip2task"],["Kill HVT #2","Kill HVT #2",""],[objNull],"CREATED",1,true,"Kill"] call BIS_fnc_taskCreate;
+    case east: {
+	if (!isNil "vip1") then {
+		[east,["opfvip1task"],["Protect HVT #1","Protect HVT #1",""],[vip1],"ASSIGNED",1,true,"Protect"] call BIS_fnc_taskCreate;
+		[west,["bluvip1task"],["Kill HVT #1","Kill HVT #1",""],[objNull],"ASSIGNED",1,true,"Kill"] call BIS_fnc_taskCreate;
+	};
+	if (!isNil "vip2") then {
+		[east,["opfvip2task"],["Protect HVT #2","Protect HVT #2",""],[vip2],"CREATED",1,true,"Protect"] call BIS_fnc_taskCreate;
+		[west,["bluvip2task"],["Kill HVT #2","Kill HVT #2",""],[objNull],"CREATED",1,true,"Kill"] call BIS_fnc_taskCreate;
+	};
   };
   case west: {
-    [west,["bluvip1task"],["Protect HVT #1","Protect HVT #1",""],[vip1],"ASSIGNED",1,true,"Protect"] call BIS_fnc_taskCreate;
-    [west,["bluvip2task"],["Protect HVT #2","Protect HVT #2",""],[vip2],"CREATED",1,true,"Protect"] call BIS_fnc_taskCreate;
-    [east,["opfvip1task"],["Kill HVT #1","Kill HVT #1",""],[objNull],"ASSIGNED",1,true,"Kill"] call BIS_fnc_taskCreate;
-    [east,["opfvip2task"],["Kill HVT #2","Kill HVT #2",""],[objNull],"CREATED",1,true,"Kill"] call BIS_fnc_taskCreate;
+	if (!isNil "vip1") then {
+		[west,["bluvip1task"],["Protect HVT #1","Protect HVT #1",""],[vip1],"ASSIGNED",1,true,"Protect"] call BIS_fnc_taskCreate;
+		[east,["opfvip1task"],["Kill HVT #1","Kill HVT #1",""],[objNull],"ASSIGNED",1,true,"Kill"] call BIS_fnc_taskCreate;
+	};
+	if (!isNil "vip2") then {
+		[west,["bluvip2task"],["Protect HVT #2","Protect HVT #2",""],[vip2],"CREATED",1,true,"Protect"] call BIS_fnc_taskCreate;
+		[east,["opfvip2task"],["Kill HVT #2","Kill HVT #2",""],[objNull],"CREATED",1,true,"Kill"] call BIS_fnc_taskCreate;
+	};
   };
 };
 
 //Update markers
 if (vipMarkers) then {
-  [] spawn {
-    while {alive vip1} do {
-      vip1Mark setMarkerPos (getPos vip1);
-      sleep vipMarkersUpdateTime;
-    };
-  };
-
-  [] spawn {
-    while {alive vip2} do {
-      vip2Mark setMarkerPos (getPos vip2);
-      sleep vipMarkersUpdateTime;
-    };
-  };
+	if (!isNil "vip1") then {
+		[] spawn {
+			while {alive vip1} do {
+				vip1Mark setMarkerPos (getPos vip1);
+				sleep vipMarkersUpdateTime;
+			};
+		};
+	};
+	if (!isNil "vip2") then {
+		[] spawn {
+			while {alive vip2} do {
+				vip2Mark setMarkerPos (getPos vip2);
+				sleep vipMarkersUpdateTime;
+			};
+		};
+	};
 };
 
 //Check end conditions
 [] spawn {
   while {!gameEnd} do {
-    if (!alive vip1 && !vip1KillMessage) then {
+  if (!isNil "vip1") then {
+	if (!alive vip1 && !vip1KillMessage) then {
       ["VIP #1 has been killed!"] remoteExec ["hint"];
       vip1KillMessage = true;
       ["vip1Mark"] remoteExec ["deleteMarker",0,true];
@@ -83,7 +100,9 @@ if (vipMarkers) then {
         ["opfvip1task","FAILED"] call BIS_fnc_taskSetState;
       };
     };
-    if (!alive vip2 && !vip2KillMessage) then {
+  };
+  if (!isNil "vip2") then {
+	if (!alive vip2 && !vip2KillMessage) then {
       ["VIP #2 has been killed!"] remoteExec ["hint"];
       vip2KillMessage = true;
       ["vip2Mark"] remoteExec ["deleteMarker",0,true];
@@ -96,7 +115,9 @@ if (vipMarkers) then {
         ["opfvip2task","FAILED"] call BIS_fnc_taskSetState;
       };
     };
-    if (!alive vip1 && !alive vip2 && !gameEnd) then {
+  };
+  if (!isNil "vip1" && !isNil "vip2") then {
+	if (!alive vip1 && !alive vip2 && !gameEnd) then {
       if (defendingSide isEqualTo east) then {
         ["Both VIPs have been killed.\nBLUFOR wins!"] remoteExec ["hint"];
       };
@@ -107,6 +128,7 @@ if (vipMarkers) then {
       sleep 15;
       "end1" call bis_fnc_endMissionServer;
     };
+  };
     sleep 3;
   };
 };

@@ -8,7 +8,7 @@ class EditorData
 	toggles=1;
 	class ItemIDProvider
 	{
-		nextID=2411;
+		nextID=2419;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={1197.718,25.776241,240.11862};
-		dir[]={0.054416731,-0.40528315,0.91258013};
-		up[]={0.024124013,0.9141891,0.40457013};
-		aside[]={0.99823529,6.1918399e-008,-0.059523314};
+		pos[]={1227.7261,15.876898,268.26532};
+		dir[]={-0.04363421,-0.3069455,0.95073175};
+		up[]={-0.014072499,0.95172697,0.30662552};
+		aside[]={0.99895471,-1.4372927e-007,0.045847405};
 	};
 };
 binarizationWanted=0;
@@ -43,13 +43,16 @@ addons[]=
 	"rhsgref_main",
 	"rhs_cti_insurgents",
 	"A3_Weapons_F_Bootcamp_Ammoboxes",
-	"ace_chemlights"
+	"ace_chemlights",
+	"A3_Structures_F_Orange_Humanitarian_Flags",
+	"A3_Structures_F_Mil_Flags",
+	"A3_Structures_F_Civ_Accessories"
 };
 class AddonsMetaData
 {
 	class List
 	{
-		items=14;
+		items=16;
 		class Item0
 		{
 			className="A3_Modules_F";
@@ -144,6 +147,20 @@ class AddonsMetaData
 			author="ACE-Team";
 			url="http://ace3mod.com/";
 		};
+		class Item14
+		{
+			className="A3_Structures_F_Orange";
+			name="Arma 3 Orange - Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
+		class Item15
+		{
+			className="A3_Structures_F_Mil";
+			name="Arma 3 - Military Buildings and Structures";
+			author="Bohemia Interactive";
+			url="https://www.arma3.com";
+		};
 	};
 };
 randomSeed=1262164;
@@ -159,6 +176,24 @@ class CustomAttributes
 		name="Multiplayer";
 		class Attribute0
 		{
+			property="RespawnTemplates";
+			expression="true";
+			class Value
+			{
+				class data
+				{
+					class type
+					{
+						type[]=
+						{
+							"ARRAY"
+						};
+					};
+				};
+			};
+		};
+		class Attribute1
+		{
 			property="RespawnButton";
 			expression="true";
 			class Value
@@ -173,24 +208,6 @@ class CustomAttributes
 						};
 					};
 					value=1;
-				};
-			};
-		};
-		class Attribute1
-		{
-			property="RespawnTemplates";
-			expression="true";
-			class Value
-			{
-				class data
-				{
-					class type
-					{
-						type[]=
-						{
-							"ARRAY"
-						};
-					};
 				};
 			};
 		};
@@ -417,7 +434,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=97;
+		items=99;
 		class Item0
 		{
 			dataType="Logic";
@@ -21697,7 +21714,7 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1200.0002,5.0108399,699.99951};
+				position[]={1200,5.0108399,700};
 			};
 			side="Empty";
 			flags=4;
@@ -21772,45 +21789,6 @@ class Mission
 		};
 		class Item73
 		{
-			dataType="Object";
-			class PositionInfo
-			{
-				position[]={1250.0002,5.0108399,699.99951};
-			};
-			side="Empty";
-			flags=4;
-			class Attributes
-			{
-				name="term3";
-			};
-			id=2302;
-			type="Land_DataTerminal_01_F";
-			class CustomAttributes
-			{
-				class Attribute0
-				{
-					property="allowDamage";
-					expression="_this allowdamage _value;";
-					class Value
-					{
-						class data
-						{
-							class type
-							{
-								type[]=
-								{
-									"BOOL"
-								};
-							};
-							value=0;
-						};
-					};
-				};
-				nAttributes=1;
-			};
-		};
-		class Item74
-		{
 			dataType="Marker";
 			position[]={1200.0002,5,699.99951};
 			name="term1Mark";
@@ -21818,7 +21796,7 @@ class Mission
 			type="mil_dot";
 			id=2309;
 		};
-		class Item75
+		class Item74
 		{
 			dataType="Marker";
 			position[]={1225.0002,5,699.99951};
@@ -21827,16 +21805,7 @@ class Mission
 			type="mil_dot";
 			id=2310;
 		};
-		class Item76
-		{
-			dataType="Marker";
-			position[]={1250.0002,5,699.99951};
-			name="term3Mark";
-			text="Terminal 3";
-			type="mil_dot";
-			id=2311;
-		};
-		class Item77
+		class Item75
 		{
 			dataType="Group";
 			side="Civilian";
@@ -21996,7 +21965,7 @@ class Mission
 			};
 			id=2312;
 		};
-		class Item78
+		class Item76
 		{
 			dataType="Group";
 			side="Civilian";
@@ -22156,223 +22125,54 @@ class Mission
 			};
 			id=2316;
 		};
-		class Item79
+		class Item77
 		{
 			dataType="Marker";
-			position[]={1200.0002,5,589.99951};
+			position[]={1200,5,600};
 			name="vip1Mark";
 			text="VIP 1";
 			type="mil_objective";
 			id=2318;
 		};
-		class Item80
+		class Item78
 		{
 			dataType="Marker";
-			position[]={1225.0002,5,589.99951};
+			position[]={1225,5,600};
 			name="vip2Mark";
 			text="VIP 2";
 			type="mil_objective";
 			id=2319;
 		};
-		class Item81
+		class Item79
 		{
 			dataType="Marker";
-			position[]={1225.0002,5,489.99951};
+			position[]={1225,5,500};
 			name="obj2Mark";
 			text="Cache #2";
 			type="mil_objective";
 			id=2322;
 		};
-		class Item82
+		class Item80
 		{
 			dataType="Marker";
-			position[]={1200,5,490};
+			position[]={1200,5,500};
 			name="obj1Mark";
 			text="Cache #1";
 			type="mil_objective";
 			id=2323;
 		};
-		class Item83
-		{
-			dataType="Group";
-			side="Civilian";
-			class Entities
-			{
-				items=1;
-				class Item0
-				{
-					dataType="Object";
-					class PositionInfo
-					{
-						position[]={1200.0002,5.0014391,400.04956};
-					};
-					side="Civilian";
-					flags=7;
-					class Attributes
-					{
-						init="call{this allowDamage false;" \n "this disableAI ""MOVE"";}";
-						name="theGuy";
-					};
-					id=2331;
-					type="C_Protagonist_VR_F";
-					class CustomAttributes
-					{
-						class Attribute0
-						{
-							property="Enh_featureType";
-							expression="_this setFeatureType parseNumber (_value)";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="0";
-								};
-							};
-						};
-						class Attribute1
-						{
-							property="ace_isHandcuffed";
-							expression="if (_value) then {[objNull, [_this], true] call ace_captives_fnc_moduleHandcuffed}";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"BOOL"
-										};
-									};
-									value=1;
-								};
-							};
-						};
-						class Attribute2
-						{
-							property="speaker";
-							expression="_this setspeaker _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"STRING"
-										};
-									};
-									value="Male04GRE";
-								};
-							};
-						};
-						class Attribute3
-						{
-							property="pitch";
-							expression="_this setpitch _value;";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"SCALAR"
-										};
-									};
-									value=1.02;
-								};
-							};
-						};
-						class Attribute4
-						{
-							property="Enh_ambientAnimParams";
-							expression="	if (is3DEN) then {_this call BIS_fnc_ambientAnim__terminate};	[_this,_value] spawn	{		sleep 0.1;		params ['_unit','_value'];		if (!(_value select 0 == '') && !isMultiplayer) then		{			[_unit,_value select 0,_value select 1,objNull,false,false] call BIS_fnc_ambientAnim;			waitUntil {sleep 0.1; ((behaviour _unit) == 'COMBAT') || (damage _unit > 0.6)};			_unit call BIS_fnc_ambientAnim__terminate;		};	}";
-							class Value
-							{
-								class data
-								{
-									class type
-									{
-										type[]=
-										{
-											"ARRAY"
-										};
-									};
-									class value
-									{
-										items=2;
-										class Item0
-										{
-											class data
-											{
-												class type
-												{
-													type[]=
-													{
-														"STRING"
-													};
-												};
-												value="";
-											};
-										};
-										class Item1
-										{
-											class data
-											{
-												class type
-												{
-													type[]=
-													{
-														"STRING"
-													};
-												};
-												value="ASIS";
-											};
-										};
-									};
-								};
-							};
-						};
-						nAttributes=5;
-					};
-				};
-			};
-			class Attributes
-			{
-			};
-			id=2330;
-		};
-		class Item84
-		{
-			dataType="Marker";
-			position[]={1200.0002,5,389.99951};
-			name="theGuyMark";
-			text="The Guy";
-			type="mil_objective";
-			id=2332;
-		};
-		class Item85
+		class Item81
 		{
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1200.0002,6.5344448,299.99951};
+				position[]={1200,6.5344448,300};
 			};
 			side="Empty";
 			flags=5;
 			class Attributes
 			{
-				init="call{if (isServer) then {" \n "this setFlagTexture ""\A3\Data_F\Flags\flag_white_co.paa"";" \n "};}";
+				init="call{if (isServer) then {" \n "this setFlagTexture ""\A3\Data_F\Flags\flag_white_co.paa"";" \n "this hideObjectGlobal true;" \n "this setPosATL (getPosATL flagPole);" \n "};}";
 				name="flagObj";
 			};
 			id=2341;
@@ -22401,24 +22201,23 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item86
+		class Item82
 		{
 			dataType="Marker";
-			position[]={1200,5,275};
+			position[]={1200,5,300};
 			name="flagMark";
 			text="Flag";
 			type="hd_flag";
 			id=2342;
 		};
-		class Item87
+		class Item83
 		{
 			dataType="Trigger";
 			position[]={1225,5,300};
 			class Attributes
 			{
 				name="bluFlagTrig";
-				condition="call{flagObj inArea thisTrigger && !gameEnd}";
-				onActivation="call{[""BLUFOR has captured the flag.\nBLUFOR wins!""] remoteExec [""hint""];" \n "deleteVehicle flagObj;" \n "gameEnd = true;" \n "[""flagMark""] remoteExec [""deleteMarker"",0,true];" \n "[""bluFlagTask"",""SUCCEEDED""] call BIS_fnc_taskSetState;" \n "[""opfFlagTask"",""FAILED""] call BIS_fnc_taskSetState;" \n "[] spawn {" \n "sleep 20;" \n """end1"" call BIS_fnc_endMissionServer;" \n "};}";
+				condition="";
 				sizeA=5;
 				sizeB=5;
 				sizeC=5;
@@ -22428,15 +22227,14 @@ class Mission
 			id=2343;
 			type="EmptyDetector";
 		};
-		class Item88
+		class Item84
 		{
 			dataType="Trigger";
 			position[]={1250,5,300};
 			class Attributes
 			{
 				name="opfFlagTrig";
-				condition="call{flagObj inArea thisTrigger && !gameEnd}";
-				onActivation="call{[""OPFOR has captured the flag.\nOPFOR wins!""] remoteExec [""hint""];" \n "deleteVehicle flagObj;" \n "gameEnd = true;" \n "[""flagMark""] remoteExec [""deleteMarker"",0,true];" \n "[""opfFlagTask"",""SUCCEEDED""] call BIS_fnc_taskSetState;" \n "[""bluFlagTask"",""FAILED""] call BIS_fnc_taskSetState;" \n "[] spawn {" \n "sleep 20;" \n """end1"" call BIS_fnc_endMissionServer;" \n "};}";
+				condition="";
 				sizeA=5;
 				sizeB=5;
 				sizeC=5;
@@ -22446,7 +22244,7 @@ class Mission
 			id=2344;
 			type="EmptyDetector";
 		};
-		class Item89
+		class Item85
 		{
 			dataType="Group";
 			side="West";
@@ -22780,7 +22578,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item90
+		class Item86
 		{
 			dataType="Group";
 			side="East";
@@ -23116,7 +22914,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item91
+		class Item87
 		{
 			dataType="Group";
 			side="East";
@@ -23751,7 +23549,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item92
+		class Item88
 		{
 			dataType="Group";
 			side="East";
@@ -24386,7 +24184,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item93
+		class Item89
 		{
 			dataType="Group";
 			side="West";
@@ -25016,7 +24814,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item94
+		class Item90
 		{
 			dataType="Group";
 			side="West";
@@ -25646,7 +25444,7 @@ class Mission
 				nAttributes=1;
 			};
 		};
-		class Item95
+		class Item91
 		{
 			dataType="Object";
 			class PositionInfo
@@ -25704,7 +25502,7 @@ class Mission
 				nAttributes=2;
 			};
 		};
-		class Item96
+		class Item92
 		{
 			dataType="Object";
 			class PositionInfo
@@ -25761,6 +25559,259 @@ class Mission
 				};
 				nAttributes=2;
 			};
+		};
+		class Item93
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1200.8101,11.419488,299.61301};
+			};
+			side="Empty";
+			flags=1;
+			class Attributes
+			{
+				init="call{if (isServer) then {" \n "this attachTo [pole, [0.8,-0.385,2.4]];" \n "};}";
+				name="flagBanner";
+				disableSimulation=1;
+			};
+			id=2412;
+			type="Banner_01_F";
+			atlOffset=5.9499998;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item94
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1200,8.9768047,300};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				name="flagPole";
+				disableSimulation=1;
+			};
+			id=2414;
+			type="FlagPole_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="Enh_featureType";
+					expression="_this setFeatureType parseNumber (_value)";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="0";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item95
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1200,8.5031853,702};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				name="uplinkSpeaker1";
+			};
+			id=2415;
+			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="Enh_featureType";
+					expression="_this setFeatureType parseNumber (_value)";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="0";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item96
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1225,8.5031853,702};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				name="uplinkSpeaker2";
+			};
+			id=2416;
+			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="Enh_featureType";
+					expression="_this setFeatureType parseNumber (_value)";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"STRING"
+								};
+							};
+							value="0";
+						};
+					};
+				};
+				class Attribute1
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=2;
+			};
+		};
+		class Item97
+		{
+			dataType="Trigger";
+			position[]={1200,12.5,702};
+			class Attributes
+			{
+				name="uplinkSound1";
+				condition="call{sound1 && !gameEnd}";
+				sizeA=0;
+				sizeB=0;
+				repeatable=1;
+				effectCondition="sound1 && !gameEnd";
+				effectSoundTrigger="AlarmSfx";
+			};
+			id=2417;
+			type="EmptyDetector";
+			atlOffset=7.5;
+		};
+		class Item98
+		{
+			dataType="Trigger";
+			position[]={1225,12.5,702};
+			class Attributes
+			{
+				name="uplinkSound2";
+				condition="call{sound2 && !gameEnd}";
+				sizeA=0;
+				sizeB=0;
+				repeatable=1;
+				effectCondition="sound2 && !gameEnd";
+				effectSoundTrigger="AlarmSfx";
+			};
+			id=2418;
+			type="EmptyDetector";
+			atlOffset=7.5;
 		};
 	};
 	class Connections

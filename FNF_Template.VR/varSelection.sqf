@@ -20,7 +20,7 @@ EAST
 
 endOnSideEliminated = true; //true/false to enable game ending when one side is eliminated
 
-activeMode = "neutralCaptureTheFlag"; //Change this string to whatever game mode you want (listed below)
+activeMode = "none"; //Change this string to whatever game mode you want (listed below)
 modeParams = [];
 
 /*

@@ -9,7 +9,7 @@ flagPoleAction = {
       {},                       // Code executed when action starts
       {},                                                                                  // Code executed on every progress tick
       {
-        [] spawn grabFlag; remoteExec ["removePoleAction",2,false]
+        call grabFlag; remoteExec ["removePoleAction",2,false]
         },                             // Code executed on completion
       {},                                                                                  // Code executed on interrupted
       [],                                                                                  // Arguments passed to the scripts as _this select 3
@@ -42,11 +42,36 @@ flagAction = {
 
 flagPlayerUID = getPlayerUID player;
 playerDead = false;
+flagInVic = false;
+hasFlag = false;
 call flagPoleAction;
 player disableCollisionWith flagObj;
 
+player addEventHandler ["GetInMan", {
+	params ["_unit", "_role", "_vehicle", "_turret"];
+  if (!hasFlag) exitWith {};
+
+  flagInVic = true;
+  publicVariableServer "flagInVic";
+
+  [_vehicle,player] remoteExec ["flagInVehicle",2,false];
+  player setAnimSpeedCoef 1;
+}];
+
+player addEventHandler ["GetOutMan", {
+	params ["_unit", "_role", "_vehicle", "_turret"];
+  if (!hasFlag) exitWith {};
+
+  flagInVic = false;
+  publicVariableServer "flagInVic";
+
+  [player] remoteExec ["flagOutVehicle",2,false];
+  player setAnimSpeedCoef 0.7;
+}];
+
 player addEventHandler ["Killed", {
   playerDead = true;
+  hasFlag = false;
 }];
 
 grabFlag = {

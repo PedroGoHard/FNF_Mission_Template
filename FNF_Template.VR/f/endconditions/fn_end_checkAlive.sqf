@@ -1,5 +1,6 @@
 _endAliveEH = addMissionEventHandler ["EntityKilled", {
   params ["_unit", "_killer", "_instigator", "_useEffects"];
+  if !(_unit isKindOf "Man") exitWith {};
   if (({(alive _x) and (side _x == west)}count playableUnits) < 1  && !gameEnd) then {
     gameEnd = true;
     ["BLUFOR eliminated.\nOPFOR wins!"] remoteExec ["hint"];

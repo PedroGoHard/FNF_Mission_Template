@@ -31,7 +31,19 @@ deleteGroundClutterEH = player addEventHandler ["Put", {
   _ammoArray = weaponMags + weaponMagsSecondary + handgunMags;
   _itemsArray = [primaryWeaponPlayer,secondaryWeaponPlayer,handgunWeaponPlayer,uniformPlayer,vestPlayer,backpackPlayer,headPlayer];
   _itemsArray = _itemsArray + _weaponsArray;
-  if ((_container isKindOf "GroundWeaponHolder" || _item in _itemsArray) && (!(_container isEqualTo _unit) || _item in _itemsArray)) then {
+  if (
+    ((_container isKindOf "GroundWeaponHolder" || _item in _itemsArray) && (!(_container isEqualTo _unit) || _item in _itemsArray)) ||
+  ((_container isKindOf "LandVehicle" || _container isKindOf "Air" || _item in _itemsArray) && (!(_container isEqualTo _unit) || _item in _itemsArray))
+  ) then {
+
+    if (_container isKindOf "GroundWeaponHolder") then {
+      displayMessage = ["Cannot place objects on the ground during safe start", "PLAIN", 0];
+    } else {
+      if (_container isKindOf "LandVehicle" || _container isKindOf "Air") then {
+        displayMessage = ["Cannot place objects in vehicles during safe start", "PLAIN", 0];
+      };
+    };
+
     [_container, _item, 1, false] call CBA_fnc_removeItemCargo;
     [_container, _item, 1, false] call CBA_fnc_removeWeaponCargo;
     [_container, _item, 1, false] call CBA_fnc_removeBackpackCargo;
@@ -147,7 +159,7 @@ deleteGroundClutterEH = player addEventHandler ["Put", {
     [player, _item] call _handleGearItem;
 
     if (!isNull findDisplay 602)then {closeDialog 602};
-    "phx_safeStartTextLayer" cutText ["No littering, please", "PLAIN", 0];
+    "phx_safeStartTextLayer" cutText displayMessage;
     "phx_safeStartTextLayer" cutFadeOut 5;
   };
 }];

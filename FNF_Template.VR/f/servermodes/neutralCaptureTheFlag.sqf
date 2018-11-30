@@ -1,6 +1,8 @@
 if (!isServer) exitWith {};
 
 instantCapture = true;
+flagInVic = false;
+flagCarrier = "";
 
 captureTime = _this select 0;
 if (isNil "captureTime") then {
@@ -66,8 +68,11 @@ if (!instantCapture) then {
 };
 
 onPlayerDisconnected {
-  if (_uid == flagPlayerUID) then {
+  if (_uid == flagPlayerUID && !flagInVic) then {
     call dropFlagServer;
+  };
+  if (_uid == flagPlayerUID && flagInVic) then {
+    call flagVicKilled;
   };
 };
 
@@ -153,6 +158,7 @@ dropFlagServer = {
 flagControlled = {
   params["_side","_player"];
   call removeFlagAction;
+  flagCarrier = _player;
   dummyMark attachTo [_player,[0,0,0]];
   flagObj attachTo [_player, [0.1,0.4,1.45], "aiming_axis"];
   [flagObj,[0,0,1]] remoteExec ["setVectorUp",0,false];
@@ -173,6 +179,80 @@ flagControlled = {
       };
     };
   };
+};
+
+flagVicEH = addMissionEventHandler ["EntityKilled",{
+	params ["_killed", "_killer", "_instigator"];
+  if !(_killed isKindOf "Man" && _killed == flagCarrier && flagInVic) exitWith {};
+
+  call flagVicKilled;
+}];
+
+flagVicKilled = {
+  detach flagObj;
+  detach dummyMark;
+
+  _pos = getPosATL flagObj;
+  _newFlagPos = _pos findEmptyPosition [0.25, 15, "rhs_Flag_chdkz"];
+  dummyMark setPosATL _newFlagPos;
+
+  flagObj attachTo [dummyMark,[0,0.475,1.5]];
+  [flagObj,[0,0,1]] remoteExec ["setVectorUp",0,false];
+  detach flagObj;
+
+  [] remoteExec ["flagAction",0,false];
+
+  if !(flagObj inArea bluFlagTrig || flagObj inArea opfFlagTrig) then {
+    ["The flag has been dropped!"] remoteExecCall ["phx_fnc__hintThenClear", 0];
+    flagObj setFlagTexture "\A3\Data_F\Flags\flag_white_co.paa";
+    "flagMark" setMarkerType "hd_flag";
+  };
+};
+
+flagInVehicle = {
+  params ["_vehicle","_unit"];
+  flagVic = _vehicle;
+
+  detach flagObj;
+  detach dummyMark;
+
+  switch (typeOf _vehicle) do {
+    case "rhsusf_m1025_w_m2": {
+      flagObj attachTo [_vehicle,[0,-1.5,0.75]];
+    };
+    case "rhsusf_m1025_w": {
+      flagObj attachTo [_vehicle,[0,-1.5,0.75]];
+    };
+    case "rhsgref_ins_uaz_dshkm": {
+      flagObj attachTo [_vehicle,[-0.8,-1.22,1.7]];
+    };
+    case "rhsgref_ins_uaz": {
+      flagObj attachTo [_vehicle,[-0.8,-1.22,1.7]];
+    };
+    case "I_G_Quadbike_01_F": {
+      flagObj attachTo [_vehicle,[-0.5,-0.6,1.1]];
+    };
+    case "rhsusf_m966_w": {
+      flagObj attachTo [_vehicle,[0,-1.5,0.75]];
+    };
+    case "rhs_btr80a_msv": {
+      flagObj attachTo [_vehicle,[-0.9,-3.5,1.85]];
+    };
+    case "RHS_M2A3_wd": {
+      flagObj attachTo [_vehicle,[-0.75,-2,2]];
+    };
+    default {
+      flagObj attachTo [_vehicle,[0,-0.5,1]];
+    };
+  };
+};
+
+flagOutVehicle = {
+  params ["_player"];
+
+  dummyMark attachTo [_player,[0,0,0]];
+  flagObj attachTo [_player, [0.1,0.4,1.45], "aiming_axis"];
+  [flagObj,[0,0,1]] remoteExec ["setVectorUp",0,false];
 };
 
 flagInZone = {

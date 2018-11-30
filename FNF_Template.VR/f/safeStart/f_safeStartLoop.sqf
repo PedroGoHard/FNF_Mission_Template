@@ -31,6 +31,5 @@ if (f_var_mission_timer isEqualTo 0) then {
         // Remotely execute script to disable safety for all selectable units
         [[false],"f_fnc_safety",playableUnits + switchableUnits] call BIS_fnc_MP;
 
-        phx_safeStartEnabled = false;
         call f_fnc_serverEndSafe;
 };

@@ -54,8 +54,9 @@ switch (activeMode) do {
   case "adDestroy": {
     modeParams execVM "f\servermodes\adDestroy.sqf";
   };
-  case "adCapturetheFlag": {
-    [] execVM "f\servermodes\adCapturetheFlag.sqf";
+  case "adCaptureTheFlag": {
+    modeParams execVM "f\servermodes\adCaptureTheFlag.sqf";
+    [[],"f\clientmodes\adCaptureTheFlag.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
   };
   case "adVIP": {
     modeParams execVM "f\servermodes\adVIP.sqf";
@@ -64,13 +65,13 @@ switch (activeMode) do {
     [] execVM "f\servermodes\neutralUplink.sqf";
   };
   case "neutralSector": {
-    [] execVM "f\servermodes\neutralSector.sqf";
+    modeParams execVM "f\servermodes\neutralSector.sqf";
   };
   case "neutralCaptureTheFlag": {
     modeParams execVM "f\servermodes\neutralCaptureTheFlag.sqf";
     [[],"f\clientmodes\neutralCaptureTheFlag.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
   };
-  case "none": {};
+  case 0: {};
   default {
     ["Game mode not configured correctly, check 'varSelection.sqf'"] remoteExec ["hint"];
   };
@@ -133,8 +134,8 @@ if !(activeMode isEqualTo "adDestroy") then {
   } forEach _markers;
 };
 
-//Neutral capture the flag
-if !(activeMode isEqualTo "neutralCaptureTheFlag") then {
+//CTF
+if (!(activeMode isEqualTo "neutralCaptureTheFlag") && !(activeMode isEqualTo "adCaptureTheFlag")) then {
   if (!isNull flagObj) then {
     deleteVehicle flagObj;
   };
@@ -145,7 +146,7 @@ if !(activeMode isEqualTo "neutralCaptureTheFlag") then {
     deleteVehicle flagBanner;
   };
   if (!(getMarkerColor "flagMark" isEqualTo "")) then {
-    deleteMarker "flagMark";
+    ["flagMark"] remoteExec ["deleteMarker",0,true];
   };
   if (!isNull bluFlagTrig) then {
     deleteVehicle bluFlagTrig;
@@ -153,4 +154,31 @@ if !(activeMode isEqualTo "neutralCaptureTheFlag") then {
   if (!isNull opfFlagTrig) then {
     deleteVehicle opfFlagTrig;
   };
+};
+
+//AD CTF
+if (activeMode isEqualTo "adCaptureTheFlag") then {
+  _defendingSide = modeParams select 0;
+  switch (_defendingSide) do {
+    case east: {
+      if (!isNull opfFlagTrig) then {
+        deleteVehicle opfFlagTrig;
+        defendingSide = east;
+      };
+    };
+    case west: {
+      if (!isNull bluFlagTrig) then {
+        deleteVehicle bluFlagTrig;
+        defendingSide = west;
+      };
+    };
+  };
+  publicVariable "defendingSide";
+};
+
+//Neutral Sector Control
+if !(activeMode isEqualTo "neutralSector") then {
+  deleteVehicle sector;
+  deleteVehicle sectorSideBlu;
+  deleteVehicle sectorSideOpf;
 };

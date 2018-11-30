@@ -13,7 +13,7 @@ eastStartHack1 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   5,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };
@@ -32,7 +32,7 @@ eastStartHack2 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   5,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };
@@ -51,7 +51,7 @@ eastStopHack1 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   1,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };
@@ -70,7 +70,7 @@ eastStopHack2 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   1,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };
@@ -89,7 +89,7 @@ westStartHack1 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   5,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };
@@ -108,7 +108,7 @@ westStartHack2 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   5,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };
@@ -127,7 +127,7 @@ westStopHack1 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   1,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };
@@ -146,7 +146,7 @@ westStopHack2 = {
   [],                                                                                  // Arguments passed to the scripts as _this select 3
   1,                                                                                   // Action duration [s]
   0,                                                                                   // Priority
-  true,                                                                                // Remove on completion
+  false,                                                                                // Remove on completion
   false                                                                                // Show in unconscious state
   ] remoteExec ["BIS_fnc_holdActionAdd", 0, true];
 };

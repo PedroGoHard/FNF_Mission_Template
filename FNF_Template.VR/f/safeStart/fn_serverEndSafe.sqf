@@ -20,7 +20,7 @@ if !(getMarkerColor "optStartMark_1" isEqualTo "") then {
     if (!(getMarkerColor _x isEqualTo "")) then {
       [_x] remoteExec ["deleteMarker",0,true];
     };
-  } forEach _markers;
+  } forEach _areaMarkers;
 };
 
 uiSleep  10;

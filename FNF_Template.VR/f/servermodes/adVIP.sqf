@@ -41,7 +41,6 @@ vip2KillMessage = false;
 //Create tasks
 switch (defendingSide) do {
   case east: {
-    case east: {
 	if (!isNil "vip1") then {
 		[east,["opfvip1task"],["Protect HVT #1","Protect HVT #1",""],[vip1],"ASSIGNED",1,true,"Protect"] call BIS_fnc_taskCreate;
 		[west,["bluvip1task"],["Kill HVT #1","Kill HVT #1",""],[objNull],"ASSIGNED",1,true,"Kill"] call BIS_fnc_taskCreate;
@@ -50,7 +49,6 @@ switch (defendingSide) do {
 		[east,["opfvip2task"],["Protect HVT #2","Protect HVT #2",""],[vip2],"CREATED",1,true,"Protect"] call BIS_fnc_taskCreate;
 		[west,["bluvip2task"],["Kill HVT #2","Kill HVT #2",""],[objNull],"CREATED",1,true,"Kill"] call BIS_fnc_taskCreate;
 	};
-  };
   case west: {
 	if (!isNil "vip1") then {
 		[west,["bluvip1task"],["Protect HVT #1","Protect HVT #1",""],[vip1],"ASSIGNED",1,true,"Protect"] call BIS_fnc_taskCreate;

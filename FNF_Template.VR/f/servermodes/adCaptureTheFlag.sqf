@@ -212,7 +212,6 @@ removePoleAction = {
 };
 
 dropFlagServer = {
-  params["_side"];
   detach flagObj;
   detach dummyMark;
   flagObj attachTo [dummyMark,[0,0.475,1.5]];

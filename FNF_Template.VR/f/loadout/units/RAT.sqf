@@ -10,7 +10,6 @@ player addWeapon phx_loadout_antitank_weapon;
 [phx_loadout_cuffs, "item"] call phx_fnc_loadout_handleGear;
 [phx_loadout_rifle_mag_tracer, "vest"] call phx_fnc_loadout_handleGear;
 [phx_loadout_rifle_mag, "vest"] call phx_fnc_loadout_handleGear;
-[phx_loadout_blood_everyone, "backpack"] call phx_fnc_loadout_handleGear;
 player addWeapon phx_loadout_rifle_weapon;
 
 // Add items

@@ -20,7 +20,7 @@ EAST
 
 endOnSideEliminated = true; //true/false to enable game ending when one side is eliminated
 
-activeMode = "none"; //Change this string to whatever game mode you want (listed below)
+activeMode = "0"; //Change this string to whatever game mode you want (listed below)
 modeParams = [];
 
 /*
@@ -62,7 +62,7 @@ vipMarkers - boolean - true/false to enable global markers following VIPs - defu
 vipMarkersUpdateTime - integer - how often the global markers will update - default: 30
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
----adCapturetheFlag - attack/defend capture the flag---
+---adCaptureTheFlag - attack/defend capture the flag---
 
 params:
 

@@ -7,7 +7,6 @@ call phx_fnc_loadout_handleClothing; // Add clothing variables above this line!
 [phx_loadout_grenade, "uniform"] call phx_fnc_loadout_handleGear;
 [phx_loadout_cuffs, "item"] call phx_fnc_loadout_handleGear;
 [phx_loadout_mmg_mag, "backpack"] call phx_fnc_loadout_handleGear;
-[phx_loadout_blood_everyone, "backpack"] call phx_fnc_loadout_handleGear;
 player addWeapon phx_loadout_mmg_weapon;
 
 

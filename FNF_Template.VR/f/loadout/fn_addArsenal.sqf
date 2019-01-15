@@ -168,6 +168,11 @@ switch (typeOf player) do {
     [player,_bluBaseItemClasses,false,false] call BIS_fnc_addVirtualItemCargo;
     [player,_bluBaseMagazineClasses,false,false] call BIS_fnc_addVirtualMagazineCargo;
     }; //P
+  case "B_crew_F": {
+    [player,_bluBaseWeaponClasses,false,false] call BIS_fnc_addVirtualWeaponCargo;
+    [player,_bluBaseItemClasses,false,false] call BIS_fnc_addVirtualItemCargo;
+    [player,_bluBaseMagazineClasses,false,false] call BIS_fnc_addVirtualMagazineCargo;
+  };
 
   //OPFOR
   case "O_officer_F":  {
@@ -245,6 +250,11 @@ switch (typeOf player) do {
     [player,_opfBaseItemClasses,false,false] call BIS_fnc_addVirtualItemCargo;
     [player,_opfBaseMagazineClasses,false,false] call BIS_fnc_addVirtualMagazineCargo;
     }; //P
+  case "O_crew_F": {
+    [player,_opfBaseWeaponClasses,false,false] call BIS_fnc_addVirtualWeaponCargo;
+    [player,_opfBaseItemClasses,false,false] call BIS_fnc_addVirtualItemCargo;
+    [player,_opfBaseMagazineClasses,false,false] call BIS_fnc_addVirtualMagazineCargo;
+  };
 };
 
 arsenal = {

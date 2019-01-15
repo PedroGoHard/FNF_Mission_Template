@@ -15,7 +15,6 @@ call phx_fnc_loadout_handleClothing; // Add clothing variables above this line!
 [phx_loadout_rifle_gl_flare, "vest"] call phx_fnc_loadout_handleGear;
 [phx_loadout_rifle_mag_tracer, "backpack"] call phx_fnc_loadout_handleGear;
 [phx_loadout_rifle_mag, "backpack"] call phx_fnc_loadout_handleGear;
-[phx_loadout_blood_everyone, "backpack"] call phx_fnc_loadout_handleGear;
 player addWeapon phx_loadout_rifle_weapon;
 
 // Add items

@@ -173,7 +173,7 @@ WEAPONS_SDAR_UNDERWATER}
 #define UNIT_OPFOR_AT "O_Soldier_AT_F"
 #define UNIT_OPFOR_AAT "O_Soldier_AAT_F"
 #define UNIT_OPFOR_P "O_pilot_F"
-#define UNIT_OPFOR_CR ""
+#define UNIT_OPFOR_CR "O_crew_f"
 #define UNIT_OPFOR_MK ""
 
 #define UNIT_BLUFOR_PL "B_officer_F"
@@ -191,7 +191,7 @@ WEAPONS_SDAR_UNDERWATER}
 #define UNIT_BLUFOR_AT "B_Soldier_AT_F"
 #define UNIT_BLUFOR_AAT "B_Soldier_AAT_F"
 #define UNIT_BLUFOR_P "B_pilot_F"
-#define UNIT_BLUFOR_CR ""
+#define UNIT_BLUFOR_CR "B_crew_F"
 #define UNIT_BLUFOR_MK ""
 
 #define UNIT_INDFOR_PL "I_officer_F"
@@ -209,7 +209,7 @@ WEAPONS_SDAR_UNDERWATER}
 #define UNIT_INDFOR_AT "I_Soldier_AT_F"
 #define UNIT_INDFOR_AAT "I_Soldier_AAT_F"
 #define UNIT_INDFOR_P "I_pilot_F"
-#define UNIT_INDFOR_CR ""
+#define UNIT_INDFOR_CR "I_crew_F"
 #define UNIT_INDFOR_MK ""
 
 #define UNIT_CIV_R "C_man_1_1_F"

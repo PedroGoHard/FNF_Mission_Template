@@ -60,6 +60,7 @@ switch (defendingSide) do {
 	};
   };
 };
+};
 
 //Update markers
 if (vipMarkers) then {

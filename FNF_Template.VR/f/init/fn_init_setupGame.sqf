@@ -71,7 +71,7 @@ switch (activeMode) do {
     modeParams execVM "f\servermodes\neutralCaptureTheFlag.sqf";
     [[],"f\clientmodes\neutralCaptureTheFlag.sqf"] remoteExec ["BIS_fnc_execVM",0,true];
   };
-  case 0: {};
+  case "0": {};
   default {
     ["Game mode not configured correctly, check 'varSelection.sqf'"] remoteExec ["hint"];
   };

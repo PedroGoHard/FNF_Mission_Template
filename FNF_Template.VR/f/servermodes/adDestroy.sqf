@@ -21,9 +21,42 @@ if (objectivesNumber == 1) then {
 
 if (!isNil "obj1") then {
   "obj1Mark" setMarkerPos (getPos obj1);
+
+  if (typeOf obj1 == "Box_FIA_Ammo_F") then {
+    obj1 addEventHandler ["HandleDamage", {
+    _unit = _this select 0;
+    _selection = _this select 1;
+    _damage = _this select 2;
+
+    if (_selection == "?") exitWith {};
+
+    _curDamage = damage _unit;
+    if (_selection != "") then {_curDamage = _unit getHit _selection};
+    _newDamage = _damage - _curDamage;
+
+    _damage - _newDamage * 0.75;
+    }];
+  };
 };
+
 if (!isNil "obj2") then {
   "obj2Mark" setMarkerPos (getPos obj2);
+
+  if (typeOf obj2 == "Box_FIA_Ammo_F") then {
+    obj2 addEventHandler ["HandleDamage", {
+    _unit = _this select 0;
+    _selection = _this select 1;
+    _damage = _this select 2;
+
+    if (_selection == "?") exitWith {};
+
+    _curDamage = damage _unit;
+    if (_selection != "") then {_curDamage = _unit getHit _selection};
+    _newDamage = _damage - _curDamage;
+
+    _damage - _newDamage * 0.75;
+    }];
+  };
 };
 
 obj1DestroyMessage = false;

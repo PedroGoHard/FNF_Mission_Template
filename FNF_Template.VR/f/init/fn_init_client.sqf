@@ -7,6 +7,10 @@ side player execVM "f\init\clientMarkerVisibilty.sqf";
 // Set loadouts
 call phx_fnc_loadout_set;
 
+//Vehicle arrays
+bluVics = [];
+opfVics = [];
+
 // Set the group IDs
 [] call compile preprocessFileLineNumbers "f\setGroupID\f_setGroupIDs.sqf";
 

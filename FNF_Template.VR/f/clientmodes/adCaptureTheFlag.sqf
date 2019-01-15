@@ -72,6 +72,11 @@ player addEventHandler ["GetOutMan", {
 }];
 
 player addEventHandler ["Killed", {
+  params ["_unit", "_killer", "_instigator", "_useEffects"];
+
+  if (hasFlag) then {
+    [] remoteExec ["dropFlagServer",2,false];
+  };
   playerDead = true;
   hasFlag = false;
 }];
@@ -96,9 +101,11 @@ dropFlag = {
 
 flagLoop = {
   while {hasFlag} do {
-    if (playerDead) then {
-      hasFlag = false;
-      [side player] remoteExec ["dropFlagServer",2,false];
+    if (player getVariable ["ACE_isUnconscious",false]) then {
+      if (hasFlag) then {
+        hasFlag = false;
+        [] remoteExec ["dropFlagServer",2,false];
+      };
     };
     sleep 0.25;
   };

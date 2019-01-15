@@ -270,7 +270,7 @@ flagInZone = {
           gameEnd = true;
           ["OPFOR has successfully held the flag.\nOPFOR wins!"] remoteExec ["hint"];
           sleep 15;
-          "end1" call bis_fnc_endMissionServer;
+          "end1" call BIS_fnc_endMissionServer;
         };
         _captureTimeDisplay = format ["OPFOR capture time remaining: %1", [_captureTimeLeft, "MM:SS"] call BIS_fnc_secondsToString];
         [_captureTimeDisplay] remoteExec ["hintSilent"];
@@ -286,7 +286,7 @@ flagInZone = {
           gameEnd = true;
           ["BLUFOR has successfully held the flag.\nBLUFOR wins!"] remoteExec ["hint"];
           sleep 15;
-          "end1" call bis_fnc_endMissionServer;
+          "end1" call BIS_fnc_endMissionServer;
         };
         _captureTimeDisplay = format ["BLUFOR capture time remaining: %1", [_captureTimeLeft, "MM:SS"] call BIS_fnc_secondsToString];
         [_captureTimeDisplay] remoteExec ["hintSilent"];

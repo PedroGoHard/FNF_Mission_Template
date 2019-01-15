@@ -25,7 +25,6 @@ phx_loadout_bandage = "ACE_fieldDressing:32";
 phx_loadout_morphine = "ACE_morphine:16";
 phx_loadout_epinephrine = "ACE_epinephrine:8";
 phx_loadout_blood = "ACE_bloodIV:2";
-phx_loadout_blood_everyone = "ACE_bloodIV_500:2";
 phx_loadout_maptools = "ACE_MapTools";
 phx_loadout_entrenching = "ACE_EntrenchingTool";
 
@@ -266,6 +265,9 @@ switch (pRole) do {
     };
     case ROLE_P: {
         [] call compile preprocessFileLineNumbers format["f\loadout\units\P.sqf"]
+    };
+    case ROLE_CR: {
+      [] call compile preprocessFileLineNumbers format["f\loadout\units\CR.sqf"]
     };
 
     //----------------------------------------
